@@ -13,6 +13,9 @@ server:
   name: hub-server
   endpoint: vpn.example.com:51820   # Public address:port
   ip: 10.0.0.1                      # Server's VPN IP (or "auto")
+  interface: eth0                   # External network interface (for NAT)
+  forward: true                     # Enable IP forwarding (default: true)
+  nat: true                         # Enable NAT/MASQUERADE (default: true)
 
 # Client nodes
 clients:
