@@ -1,0 +1,40 @@
+# WireGuard Config Wizard - Example Configuration
+#
+# This file defines a WireGuard network with a hub-spoke topology.
+# Run: python main.py example.yaml
+
+network:
+  name: my-vpn              # Network name (for comments)
+  subnet: 10.0.0.0/24       # VPN subnet for IP allocation
+  keepalive: 25             # PersistentKeepalive in seconds
+
+# Central server (hub)
+server:
+  name: hub-server
+  endpoint: vpn.example.com:51820   # Public address:port
+  ip: 10.0.0.1                      # Server's VPN IP (or "auto")
+
+# Client nodes
+clients:
+  # Manual IP, can connect to all nodes
+  - name: home-pc
+    ip: 10.0.0.2
+    connect_to: all
+
+  # Auto IP, can only connect to specific nodes
+  - name: laptop
+    ip: auto
+    connect_to:
+      - home-pc
+
+  # Manual IP, connect to multiple specific nodes
+  - name: cloud-vm
+    ip: 10.0.0.10
+    connect_to:
+      - home-pc
+      - laptop
+
+  # Auto IP, connect to all
+  - name: phone
+    ip: auto
+    connect_to: all
